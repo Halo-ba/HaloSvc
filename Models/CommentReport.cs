@@ -8,9 +8,9 @@ public class CommentReport
 
     [Required]
     [StringLength(200)]
-    public string ReportDescription { get; set; }
+    public string ReportDescription { get; set; } = string.Empty;
 
     // Foreign key for Comment
     public int CommentId { get; set; }
-    public Comment Comment { get; set; } // Navigation property
+    public Comment? Comment { get; set; } // Navigation property
 }

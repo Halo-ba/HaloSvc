@@ -8,9 +8,9 @@ public class Image
 
     [Required]
     [StringLength(50)]
-    public string Url { get; set; }
+    public string Url { get; set; } = string.Empty;
 
     // Foreign key for Article
     public int ArticleId { get; set; }
-    public Article Article { get; set; } // Navigation property
+    public Article? Article { get; set; } // Navigation property
 }
