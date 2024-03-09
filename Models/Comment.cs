@@ -10,7 +10,7 @@ public class Comment
     [StringLength(1000)]
     public string Content { get; set; } = string.Empty;
 
-    public DateTime? PostDate { get; set; }
+    public DateTime PostDate { get; set; } = DateTime.Now;
 
     // Foreign key for ArticleCategory
     public int ArticleId { get; set; }
