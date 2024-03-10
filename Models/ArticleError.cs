@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-public class ArticleError
+namespace Backend.Models
 {
-    [Key]
-    public int Id { get; set; }
+    public class ArticleError
+    {
+        [Key]
+        public int Id { get; set; }
 
-    [Required]
-    [StringLength(500)]
-    public string Description { get; set; } = string.Empty;
+        [Required]
+        [StringLength(500)]
+        public string Description { get; set; } = string.Empty;
 
-    // Foreign key for Article
-    public int ArticleId { get; set; }
-    public Article? Article { get; set; } // Navigation property
+        // Foreign key for Article
+        public int ArticleId { get; set; }
+        public Article? Article { get; set; } // Navigation property
+    }
 }

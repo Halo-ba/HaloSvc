@@ -1,5 +1,8 @@
-public enum VoteType
+namespace Backend.Models
 {
-    DownVote = 0,
-    UpVote = 1
+    public enum VoteType
+    {
+        DownVote = 0,
+        UpVote = 1
+    }
 }

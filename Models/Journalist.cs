@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-public class Journalist : Person
+namespace Backend.Models
 {
-    
-    [Required]
-    public DateTime HireDate { get; set; }
-    public List<NewsReport> NewsReport { get; set; } = new List<NewsReport>(); // One-to-many relationship
-    public List<Article> Articles { get; set; } = new List<Article>();
+    public class Journalist : Person
+    {
+        
+        [Required]
+        public DateTime HireDate { get; set; }
+        public List<NewsReport> NewsReport { get; set; } = new List<NewsReport>(); // One-to-many relationship
+        public List<Article> Articles { get; set; } = new List<Article>();
+    }
 }
