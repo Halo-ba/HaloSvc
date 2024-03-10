@@ -1,6 +1,8 @@
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
+using Backend.Interfaces;
+using Backend.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings:Default"));
 });
+
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
 
 var app = builder.Build();
 

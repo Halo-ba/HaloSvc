@@ -7,7 +7,7 @@ using Backend.QueryObjects;
 using Backend.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Repository
+namespace Backend.Repositories
 {
     public class CommentRepository : ICommentRepository
     {
