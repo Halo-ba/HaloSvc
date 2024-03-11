@@ -18,9 +18,9 @@ namespace Backend.Interfaces
         //Will be implemented after implementing MarketingTeamMember  
         //Task<Advertisement?> GetByMarketingTeamMemberIdAsync(int id);
         
-        Task<Advertisement> CreateAsync(Advertisement AdvertisementModel);
+        Task<Advertisement> CreateAsync(Advertisement advertisementModel);
         
-        Task<Advertisement?> UpdateAsync(int id, AdvertisementDto AdvertisementDto);
+        Task<Advertisement?> UpdateAsync(int id, AdvertisementDto advertisementDto);
         
         Task<Advertisement?> DeleteAsync(int id);
         
