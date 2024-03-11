@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 
 namespace Backend.QueryObjects
 {
-    public class ArticleQueryObject
+    public class AdvertisementQueryObject
     {
-        public DateTime? PostDate { get; set; }
-        public int? NumberOfShares { get; set; }
+        public DateTime? StartDate { get; set; }
+        public int? NumberOfDays { get; set; }
+        public double? Price { get; set; }
         public string? SortBy { get; set; } = null;
         public bool IsDecsending { get; set; } = false;
-        //Pagination
-        public int PageNumber { get; set; } = 1;
-        public int PageSize { get; set; } = 20;
     }
 }
