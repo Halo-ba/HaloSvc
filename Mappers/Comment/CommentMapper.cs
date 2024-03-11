@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Dtos.Comment;
+using Backend.Models;
 
 namespace Backend.Mappers
 {
@@ -20,13 +21,19 @@ namespace Backend.Mappers
             };
         }
 
-        public static Comment ToCommentFromCreate(this CommentDto commentDto, int articleId)
+        public static Comment ToCommentFromCreate(this CommentDto commentDto, int articleId, int RegisteredUserId)
         {
-            return new Comment
+            Comment tempComment = new Comment();
+            tempComment.Content = commentDto.Content;
+            tempComment.ArticleId = articleId;
+            tempComment.RegisteredUserId = RegisteredUserId;
+            return tempComment;
+            /*return new Comment
             {
                 Content = commentDto.Content,
-                ArticleId = articleId
-            };
+                ArticleId = articleId,
+                RegisteredUserId = RegisteredUserId
+            };*/
         }
 
         public static Comment ToCommentFromUpdate(this UpdateCommentRequestDto commentDto, int articleId)

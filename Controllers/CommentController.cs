@@ -55,14 +55,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        [Route("{ArticleId}")]
-        public async Task<IActionResult> Create([FromRoute] int articleId, CommentDto commentDto)
+        [Route("{ArticleId}, {UserId}")]
+        public async Task<IActionResult> Create([FromRoute] int articleId, int userId, CommentDto commentDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            //RegisteredUser will be added when finishing routes for it...
-            var commentModel = commentDto.ToCommentFromCreate(articleId);
+            //RegisteredUser and Article will be added when finishing routes for it...
+            var commentModel = commentDto.ToCommentFromCreate(articleId, userId);
             await _commentRepo.CreateAsync(commentModel);
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Backend.Data;
 using Backend.QueryObjects;
 using Backend.Interfaces;
+using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repositories
