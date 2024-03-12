@@ -13,15 +13,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
-    [Route("api/Article")]
+    [Route("api/article")]
     [ApiController]
     public class ArticleController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly IArticleRepository _ArticleRepo;
-        public ArticleController(ApplicationDbContext context, IArticleRepository ArticleRepo)
+        private readonly IArticleRepository _articleRepo;
+        public ArticleController(ApplicationDbContext context, IArticleRepository articleRepo)
         {
-            _ArticleRepo = ArticleRepo;
+            _articleRepo = articleRepo;
             _context = context;
         }
 
@@ -32,11 +32,11 @@ namespace Backend.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var Articles = await _ArticleRepo.GetAllAsync(query);
+            var articles = await _articleRepo.GetAllAsync(query);
 
-            var ArticleDto = Articles.Select(s => s.ToArticleDto()).ToList();
+            var articleDto = articles.Select(s => s.ToArticleDto()).ToList();
 
-            return Ok(ArticleDto);
+            return Ok(articleDto);
         }
 
         [HttpGet("{id:int}")]
@@ -45,14 +45,14 @@ namespace Backend.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var Article = await _ArticleRepo.GetByIdAsync(id);
+            var article = await _articleRepo.GetByIdAsync(id);
 
-            if (Article == null)
+            if (article == null)
             {
                 return NotFound();
             }
 
-            return Ok(Article.ToArticleDto());
+            return Ok(article.ToArticleDto());
         }
 
         [HttpPost]
@@ -63,7 +63,7 @@ namespace Backend.Controllers
 
             var articleModel = articleDto.ToArticleFromCreateDTO();
 
-            await _ArticleRepo.CreateAsync(articleModel);
+            await _articleRepo.CreateAsync(articleModel);
 
             return CreatedAtAction(nameof(GetById), new { id = articleModel.Id }, articleModel.ToArticleDto());
         }
@@ -75,7 +75,7 @@ namespace Backend.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var articleModel = await _ArticleRepo.UpdateAsync(id, articleDto);
+            var articleModel = await _articleRepo.UpdateAsync(id, articleDto);
 
             if (articleModel == null)
             {
@@ -92,7 +92,7 @@ namespace Backend.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var articleModel = await _ArticleRepo.DeleteAsync(id);
+            var articleModel = await _articleRepo.DeleteAsync(id);
 
             if (articleModel == null)
             {
