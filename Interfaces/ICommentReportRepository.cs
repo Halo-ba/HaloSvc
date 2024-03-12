@@ -11,8 +11,8 @@ namespace Backend.Interfaces
     {
         Task<List<CommentReport>> GetAllAsync();
         Task<CommentReport?> GetByIdAsync(int id);
-        Task<CommentReport?> GetByCommentIdAsync(int id);
-        Task<CommentReport> CreateAsync(int commentId, CommentReport commentReportModel);
+        Task<List<CommentReport?>> GetCommentReportsByCommentIdAsync(int commentId);
+        Task<CommentReport> CreateAsync(CommentReport commentReportModel);
         Task<CommentReport?> UpdateAsync(int id, CommentReport commentReportModel);
         Task<CommentReport?> DeleteAsync(int id);
     }
