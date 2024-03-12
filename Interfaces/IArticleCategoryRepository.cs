@@ -11,7 +11,6 @@ namespace Backend.Interfaces
     {
         Task<List<ArticleCategory>> GetAllAsync();
         Task<ArticleCategory?> GetByIdAsync(int id);
-        Task<List<ArticleCategory?>> GetArticleCategorysByArticleIdAsync(int articleId);
         Task<ArticleCategory> CreateAsync(ArticleCategory articleCategoryModel);
         Task<ArticleCategory?> UpdateAsync(int id, ArticleCategory articleCategoryModel);
         Task<ArticleCategory?> DeleteAsync(int id);
