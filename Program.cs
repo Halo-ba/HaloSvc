@@ -19,6 +19,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IAdvertisementRepository, AdvertisementRepository>();
+builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<INewsReportRepository, NewsReportRepository>();
+builder.Services.AddScoped<IArticleErrorRepository, ArticleErrorRepository>();
+builder.Services.AddScoped<IArticleCategoryRepository, ArticleCategoryRepository>();
+builder.Services.AddScoped<ICommentReportRepository, CommentReportRepository>();
 
 
 var app = builder.Build();
