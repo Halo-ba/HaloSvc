@@ -22,7 +22,7 @@ namespace Backend.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Advertisement", b =>
+            modelBuilder.Entity("Backend.Models.Advertisement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,7 +54,7 @@ namespace Backend.Migrations
                     b.ToTable("Advertisements");
                 });
 
-            modelBuilder.Entity("Article", b =>
+            modelBuilder.Entity("Backend.Models.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +93,7 @@ namespace Backend.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("ArticleCategory", b =>
+            modelBuilder.Entity("Backend.Models.ArticleCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,7 +111,7 @@ namespace Backend.Migrations
                     b.ToTable("ArticleCategories");
                 });
 
-            modelBuilder.Entity("ArticleError", b =>
+            modelBuilder.Entity("Backend.Models.ArticleError", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,7 +134,7 @@ namespace Backend.Migrations
                     b.ToTable("ArticleErrors");
                 });
 
-            modelBuilder.Entity("Comment", b =>
+            modelBuilder.Entity("Backend.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,7 +150,7 @@ namespace Backend.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("varchar(1000)");
 
-                    b.Property<DateTime?>("PostDate")
+                    b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int>("RegisteredUserId")
@@ -165,7 +165,7 @@ namespace Backend.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("CommentReport", b =>
+            modelBuilder.Entity("Backend.Models.CommentReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -188,7 +188,7 @@ namespace Backend.Migrations
                     b.ToTable("CommentReports");
                 });
 
-            modelBuilder.Entity("Image", b =>
+            modelBuilder.Entity("Backend.Models.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -211,7 +211,7 @@ namespace Backend.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("NewsReport", b =>
+            modelBuilder.Entity("Backend.Models.NewsReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -250,7 +250,7 @@ namespace Backend.Migrations
                     b.ToTable("NewsReports");
                 });
 
-            modelBuilder.Entity("Person", b =>
+            modelBuilder.Entity("Backend.Models.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -290,7 +290,7 @@ namespace Backend.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Vote", b =>
+            modelBuilder.Entity("Backend.Models.Vote", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -313,16 +313,16 @@ namespace Backend.Migrations
                     b.ToTable("Votes");
                 });
 
-            modelBuilder.Entity("Administator", b =>
+            modelBuilder.Entity("Backend.Models.Administator", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.HasDiscriminator().HasValue("Administator");
                 });
 
-            modelBuilder.Entity("Journalist", b =>
+            modelBuilder.Entity("Backend.Models.Journalist", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime(6)");
@@ -336,9 +336,9 @@ namespace Backend.Migrations
                     b.HasDiscriminator().HasValue("Journalist");
                 });
 
-            modelBuilder.Entity("MarketingTeamMember", b =>
+            modelBuilder.Entity("Backend.Models.MarketingTeamMember", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime(6)");
@@ -346,9 +346,9 @@ namespace Backend.Migrations
                     b.HasDiscriminator().HasValue("MarketingTeamMember");
                 });
 
-            modelBuilder.Entity("RegisteredUser", b =>
+            modelBuilder.Entity("Backend.Models.RegisteredUser", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime(6)");
@@ -356,9 +356,9 @@ namespace Backend.Migrations
                     b.HasDiscriminator().HasValue("RegisteredUser");
                 });
 
-            modelBuilder.Entity("Advertisement", b =>
+            modelBuilder.Entity("Backend.Models.Advertisement", b =>
                 {
-                    b.HasOne("MarketingTeamMember", "MarketingTeamMember")
+                    b.HasOne("Backend.Models.MarketingTeamMember", "MarketingTeamMember")
                         .WithMany("Advertisements")
                         .HasForeignKey("MarketingTeamMemberId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -367,15 +367,15 @@ namespace Backend.Migrations
                     b.Navigation("MarketingTeamMember");
                 });
 
-            modelBuilder.Entity("Article", b =>
+            modelBuilder.Entity("Backend.Models.Article", b =>
                 {
-                    b.HasOne("ArticleCategory", "ArticleCategory")
+                    b.HasOne("Backend.Models.ArticleCategory", "ArticleCategory")
                         .WithMany("Articles")
                         .HasForeignKey("ArticleCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Journalist", "Journalist")
+                    b.HasOne("Backend.Models.Journalist", "Journalist")
                         .WithMany("Articles")
                         .HasForeignKey("JournalistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -386,9 +386,9 @@ namespace Backend.Migrations
                     b.Navigation("Journalist");
                 });
 
-            modelBuilder.Entity("ArticleError", b =>
+            modelBuilder.Entity("Backend.Models.ArticleError", b =>
                 {
-                    b.HasOne("Article", "Article")
+                    b.HasOne("Backend.Models.Article", "Article")
                         .WithMany("ArticleErrors")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -397,15 +397,15 @@ namespace Backend.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("Comment", b =>
+            modelBuilder.Entity("Backend.Models.Comment", b =>
                 {
-                    b.HasOne("Article", "Article")
-                        .WithMany()
+                    b.HasOne("Backend.Models.Article", "Article")
+                        .WithMany("Comments")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RegisteredUser", "RegisteredUser")
+                    b.HasOne("Backend.Models.RegisteredUser", "RegisteredUser")
                         .WithMany("Comments")
                         .HasForeignKey("RegisteredUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -416,9 +416,9 @@ namespace Backend.Migrations
                     b.Navigation("RegisteredUser");
                 });
 
-            modelBuilder.Entity("CommentReport", b =>
+            modelBuilder.Entity("Backend.Models.CommentReport", b =>
                 {
-                    b.HasOne("Comment", "Comment")
+                    b.HasOne("Backend.Models.Comment", "Comment")
                         .WithMany("CommentReports")
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -427,9 +427,9 @@ namespace Backend.Migrations
                     b.Navigation("Comment");
                 });
 
-            modelBuilder.Entity("Image", b =>
+            modelBuilder.Entity("Backend.Models.Image", b =>
                 {
-                    b.HasOne("Article", "Article")
+                    b.HasOne("Backend.Models.Article", "Article")
                         .WithMany("Images")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -438,9 +438,9 @@ namespace Backend.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("NewsReport", b =>
+            modelBuilder.Entity("Backend.Models.NewsReport", b =>
                 {
-                    b.HasOne("Journalist", "Journalist")
+                    b.HasOne("Backend.Models.Journalist", "Journalist")
                         .WithMany("NewsReport")
                         .HasForeignKey("JournalistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -449,15 +449,15 @@ namespace Backend.Migrations
                     b.Navigation("Journalist");
                 });
 
-            modelBuilder.Entity("Vote", b =>
+            modelBuilder.Entity("Backend.Models.Vote", b =>
                 {
-                    b.HasOne("Comment", "Comment")
+                    b.HasOne("Backend.Models.Comment", "Comment")
                         .WithMany("Votes")
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RegisteredUser", "RegisteredUser")
+                    b.HasOne("Backend.Models.RegisteredUser", "RegisteredUser")
                         .WithMany("Votes")
                         .HasForeignKey("RegisteredUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -468,38 +468,40 @@ namespace Backend.Migrations
                     b.Navigation("RegisteredUser");
                 });
 
-            modelBuilder.Entity("Article", b =>
+            modelBuilder.Entity("Backend.Models.Article", b =>
                 {
                     b.Navigation("ArticleErrors");
+
+                    b.Navigation("Comments");
 
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("ArticleCategory", b =>
+            modelBuilder.Entity("Backend.Models.ArticleCategory", b =>
                 {
                     b.Navigation("Articles");
                 });
 
-            modelBuilder.Entity("Comment", b =>
+            modelBuilder.Entity("Backend.Models.Comment", b =>
                 {
                     b.Navigation("CommentReports");
 
                     b.Navigation("Votes");
                 });
 
-            modelBuilder.Entity("Journalist", b =>
+            modelBuilder.Entity("Backend.Models.Journalist", b =>
                 {
                     b.Navigation("Articles");
 
                     b.Navigation("NewsReport");
                 });
 
-            modelBuilder.Entity("MarketingTeamMember", b =>
+            modelBuilder.Entity("Backend.Models.MarketingTeamMember", b =>
                 {
                     b.Navigation("Advertisements");
                 });
 
-            modelBuilder.Entity("RegisteredUser", b =>
+            modelBuilder.Entity("Backend.Models.RegisteredUser", b =>
                 {
                     b.Navigation("Comments");
 

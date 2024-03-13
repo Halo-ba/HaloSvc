@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240309112445_Second")]
-    partial class Second
+    [Migration("20240313132122_najjaci")]
+    partial class najjaci
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,22 +21,22 @@ namespace Backend.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Advertisement", b =>
+            modelBuilder.Entity("Backend.Models.Advertisement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AdvertisementEmail")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("MarketingTeamMemberId")
                         .HasColumnType("int");
@@ -45,10 +45,10 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     b.Property<double?>("Price")
-                        .HasColumnType("float");
+                        .HasColumnType("double");
 
                     b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -57,13 +57,13 @@ namespace Backend.Migrations
                     b.ToTable("Advertisements");
                 });
 
-            modelBuilder.Entity("Article", b =>
+            modelBuilder.Entity("Backend.Models.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ArticleCategoryId")
                         .HasColumnType("int");
@@ -71,7 +71,7 @@ namespace Backend.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(20000)
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("JournalistId")
                         .HasColumnType("int");
@@ -80,12 +80,12 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("PostDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 
@@ -96,31 +96,31 @@ namespace Backend.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("ArticleCategory", b =>
+            modelBuilder.Entity("Backend.Models.ArticleCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ArticleCategories");
                 });
 
-            modelBuilder.Entity("ArticleError", b =>
+            modelBuilder.Entity("Backend.Models.ArticleError", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
@@ -128,7 +128,7 @@ namespace Backend.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("varchar(500)");
 
                     b.HasKey("Id");
 
@@ -137,13 +137,13 @@ namespace Backend.Migrations
                     b.ToTable("ArticleErrors");
                 });
 
-            modelBuilder.Entity("Comment", b =>
+            modelBuilder.Entity("Backend.Models.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
@@ -151,10 +151,10 @@ namespace Backend.Migrations
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("varchar(1000)");
 
-                    b.Property<DateTime?>("PostDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("PostDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("RegisteredUserId")
                         .HasColumnType("int");
@@ -168,13 +168,13 @@ namespace Backend.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("CommentReport", b =>
+            modelBuilder.Entity("Backend.Models.CommentReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CommentId")
                         .HasColumnType("int");
@@ -182,7 +182,7 @@ namespace Backend.Migrations
                     b.Property<string>("ReportDescription")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 
@@ -191,13 +191,13 @@ namespace Backend.Migrations
                     b.ToTable("CommentReports");
                 });
 
-            modelBuilder.Entity("Image", b =>
+            modelBuilder.Entity("Backend.Models.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
@@ -205,7 +205,7 @@ namespace Backend.Migrations
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -214,20 +214,20 @@ namespace Backend.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("NewsReport", b =>
+            modelBuilder.Entity("Backend.Models.NewsReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DateOfReport")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("JournalistId")
                         .HasColumnType("int");
@@ -235,16 +235,16 @@ namespace Backend.Migrations
                     b.Property<string>("Reporter")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("ReporterTelephoneNumber")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasMaxLength(2000)
-                        .HasColumnType("nvarchar(2000)");
+                        .HasColumnType("varchar(2000)");
 
                     b.HasKey("Id");
 
@@ -253,36 +253,36 @@ namespace Backend.Migrations
                     b.ToTable("NewsReports");
                 });
 
-            modelBuilder.Entity("Person", b =>
+            modelBuilder.Entity("Backend.Models.Person", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
+                        .HasColumnType("varchar(21)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
+                        .HasColumnType("varchar(64)");
 
                     b.Property<string>("Surname")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -293,7 +293,7 @@ namespace Backend.Migrations
                     b.UseTphMappingStrategy();
                 });
 
-            modelBuilder.Entity("Vote", b =>
+            modelBuilder.Entity("Backend.Models.Vote", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("int");
@@ -316,19 +316,19 @@ namespace Backend.Migrations
                     b.ToTable("Votes");
                 });
 
-            modelBuilder.Entity("Administator", b =>
+            modelBuilder.Entity("Backend.Models.Administator", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.HasDiscriminator().HasValue("Administator");
                 });
 
-            modelBuilder.Entity("Journalist", b =>
+            modelBuilder.Entity("Backend.Models.Journalist", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.Property<DateTime>("HireDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.ToTable("Persons", t =>
                         {
@@ -339,29 +339,29 @@ namespace Backend.Migrations
                     b.HasDiscriminator().HasValue("Journalist");
                 });
 
-            modelBuilder.Entity("MarketingTeamMember", b =>
+            modelBuilder.Entity("Backend.Models.MarketingTeamMember", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.Property<DateTime>("HireDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasDiscriminator().HasValue("MarketingTeamMember");
                 });
 
-            modelBuilder.Entity("RegisteredUser", b =>
+            modelBuilder.Entity("Backend.Models.RegisteredUser", b =>
                 {
-                    b.HasBaseType("Person");
+                    b.HasBaseType("Backend.Models.Person");
 
                     b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasDiscriminator().HasValue("RegisteredUser");
                 });
 
-            modelBuilder.Entity("Advertisement", b =>
+            modelBuilder.Entity("Backend.Models.Advertisement", b =>
                 {
-                    b.HasOne("MarketingTeamMember", "MarketingTeamMember")
+                    b.HasOne("Backend.Models.MarketingTeamMember", "MarketingTeamMember")
                         .WithMany("Advertisements")
                         .HasForeignKey("MarketingTeamMemberId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -370,15 +370,15 @@ namespace Backend.Migrations
                     b.Navigation("MarketingTeamMember");
                 });
 
-            modelBuilder.Entity("Article", b =>
+            modelBuilder.Entity("Backend.Models.Article", b =>
                 {
-                    b.HasOne("ArticleCategory", "ArticleCategory")
+                    b.HasOne("Backend.Models.ArticleCategory", "ArticleCategory")
                         .WithMany("Articles")
                         .HasForeignKey("ArticleCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Journalist", "Journalist")
+                    b.HasOne("Backend.Models.Journalist", "Journalist")
                         .WithMany("Articles")
                         .HasForeignKey("JournalistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -389,9 +389,9 @@ namespace Backend.Migrations
                     b.Navigation("Journalist");
                 });
 
-            modelBuilder.Entity("ArticleError", b =>
+            modelBuilder.Entity("Backend.Models.ArticleError", b =>
                 {
-                    b.HasOne("Article", "Article")
+                    b.HasOne("Backend.Models.Article", "Article")
                         .WithMany("ArticleErrors")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -400,15 +400,15 @@ namespace Backend.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("Comment", b =>
+            modelBuilder.Entity("Backend.Models.Comment", b =>
                 {
-                    b.HasOne("Article", "Article")
-                        .WithMany()
+                    b.HasOne("Backend.Models.Article", "Article")
+                        .WithMany("Comments")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RegisteredUser", "RegisteredUser")
+                    b.HasOne("Backend.Models.RegisteredUser", "RegisteredUser")
                         .WithMany("Comments")
                         .HasForeignKey("RegisteredUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -419,9 +419,9 @@ namespace Backend.Migrations
                     b.Navigation("RegisteredUser");
                 });
 
-            modelBuilder.Entity("CommentReport", b =>
+            modelBuilder.Entity("Backend.Models.CommentReport", b =>
                 {
-                    b.HasOne("Comment", "Comment")
+                    b.HasOne("Backend.Models.Comment", "Comment")
                         .WithMany("CommentReports")
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -430,9 +430,9 @@ namespace Backend.Migrations
                     b.Navigation("Comment");
                 });
 
-            modelBuilder.Entity("Image", b =>
+            modelBuilder.Entity("Backend.Models.Image", b =>
                 {
-                    b.HasOne("Article", "Article")
+                    b.HasOne("Backend.Models.Article", "Article")
                         .WithMany("Images")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -441,9 +441,9 @@ namespace Backend.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("NewsReport", b =>
+            modelBuilder.Entity("Backend.Models.NewsReport", b =>
                 {
-                    b.HasOne("Journalist", "Journalist")
+                    b.HasOne("Backend.Models.Journalist", "Journalist")
                         .WithMany("NewsReport")
                         .HasForeignKey("JournalistId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -452,15 +452,15 @@ namespace Backend.Migrations
                     b.Navigation("Journalist");
                 });
 
-            modelBuilder.Entity("Vote", b =>
+            modelBuilder.Entity("Backend.Models.Vote", b =>
                 {
-                    b.HasOne("Comment", "Comment")
+                    b.HasOne("Backend.Models.Comment", "Comment")
                         .WithMany("Votes")
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RegisteredUser", "RegisteredUser")
+                    b.HasOne("Backend.Models.RegisteredUser", "RegisteredUser")
                         .WithMany("Votes")
                         .HasForeignKey("RegisteredUserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -471,38 +471,40 @@ namespace Backend.Migrations
                     b.Navigation("RegisteredUser");
                 });
 
-            modelBuilder.Entity("Article", b =>
+            modelBuilder.Entity("Backend.Models.Article", b =>
                 {
                     b.Navigation("ArticleErrors");
+
+                    b.Navigation("Comments");
 
                     b.Navigation("Images");
                 });
 
-            modelBuilder.Entity("ArticleCategory", b =>
+            modelBuilder.Entity("Backend.Models.ArticleCategory", b =>
                 {
                     b.Navigation("Articles");
                 });
 
-            modelBuilder.Entity("Comment", b =>
+            modelBuilder.Entity("Backend.Models.Comment", b =>
                 {
                     b.Navigation("CommentReports");
 
                     b.Navigation("Votes");
                 });
 
-            modelBuilder.Entity("Journalist", b =>
+            modelBuilder.Entity("Backend.Models.Journalist", b =>
                 {
                     b.Navigation("Articles");
 
                     b.Navigation("NewsReport");
                 });
 
-            modelBuilder.Entity("MarketingTeamMember", b =>
+            modelBuilder.Entity("Backend.Models.MarketingTeamMember", b =>
                 {
                     b.Navigation("Advertisements");
                 });
 
-            modelBuilder.Entity("RegisteredUser", b =>
+            modelBuilder.Entity("Backend.Models.RegisteredUser", b =>
                 {
                     b.Navigation("Comments");
 
