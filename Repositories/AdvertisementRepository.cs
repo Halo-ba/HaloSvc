@@ -9,7 +9,7 @@ using Backend.Interfaces;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using Backend.Mappers;
-
+//
 namespace Backend.Repositories
 {
     public class AdvertisementRepository : IAdvertisementRepository

@@ -18,3 +18,4 @@ namespace Backend.Dtos.NewsReport
         public string? Email { get; set; }
     }
 }
+//

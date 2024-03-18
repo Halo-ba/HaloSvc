@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
-
+//
 namespace Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]

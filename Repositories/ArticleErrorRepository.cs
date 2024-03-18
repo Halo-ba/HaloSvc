@@ -7,7 +7,7 @@ using Backend.QueryObjects;
 using Backend.Interfaces;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
-
+//
 namespace Backend.Repositories
 {
     public class ArticleErrorRepository : IArticleErrorRepository

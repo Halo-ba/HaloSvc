@@ -27,3 +27,4 @@ namespace Backend.Interfaces
         Task<bool> NewsReportExists(int id);
     }
 }
+//
