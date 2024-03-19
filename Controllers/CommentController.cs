@@ -10,6 +10,7 @@ using Backend.Interfaces;
 using Backend.QueryObjects;
 using Backend.Mappers;
 using Backend.Dtos.Comment;
+using Backend.Models;
 
 namespace Backend.Controllers
 {
