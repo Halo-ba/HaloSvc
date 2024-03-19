@@ -21,12 +21,13 @@ namespace Backend.Mappers
             };
         }
 
-        public static Comment ToCommentFromCreate(this CommentDto commentDto, int articleId)
+        public static Comment ToCommentFromCreate(this CommentDto commentDto, int articleId, int RegisteredUserId)
         {
             return new Comment
             {
                 Content = commentDto.Content,
-                ArticleId = articleId
+                ArticleId = articleId,
+                RegisteredUserId = RegisteredUserId
             };
         }
 
